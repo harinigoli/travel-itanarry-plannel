@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Itinerary Planner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://img.freepik.com/free-vector/suitcase-hat-seascape-scene_603843-3531.jpg?size=626&ext=jpg&ga=GA1.1.1395880969.1709769600&semt=sph');
+            background-size: cover;
+            background-position: center;
+        }
+        #container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Add opacity to improve readability */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"], input[type="date"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            margin-bottom: 5px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .delete-button {
+            background-color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h2>Travel Itinerary Planner</h2>
+        <label for="destination">Destination:</label>
+        <input type="text" id="destination" placeholder="Enter destination...">
+        <label for="arrivalDate">Arrival Date:</label>
+        <input type="date" id="arrivalDate">
+        <label for="departureDate">Departure Date:</label>
+        <input type="date" id="departureDate">
+        <label for="activities">Activities:</label>
+        <textarea id="activities" placeholder="Enter activities..."></textarea>
+        <button onclick="addItinerary()">Add to Itinerary</button>
+        <h3>Itinerary</h3>
+        <ul id="itineraryList"></ul>
+    </div>
+
+    <script>
+        function addItinerary() {
+            var destination = document.getElementById("destination").value;
+            var arrivalDate = document.getElementById("arrivalDate").value;
+            var departureDate = document.getElementById("departureDate").value;
+            var activities = document.getElementById("activities").value;
+
+            if (!destination || !arrivalDate || !departureDate || !activities) {
+                alert("Please fill out all fields.");
+                return;
+            }
+
+            var itineraryItem = document.createElement("li");
+            itineraryItem.innerHTML = "<strong>Destination:</strong> " + destination +
+                                       "<br><strong>Arrival Date:</strong> " + arrivalDate +
+                                       "<br><strong>Departure Date:</strong> " + departureDate +
+                                       "<br><strong>Activities:</strong> " + activities +
+                                       "<button class='delete-button' onclick='deleteItem(this)'>Delete</button>";
+
+            document.getElementById("itineraryList").appendChild(itineraryItem);
+            // Clear input fields after adding itinerary item
+            document.getElementById("destination").value = "";
+            document.getElementById("arrivalDate").value = "";
+            document.getElementById("departureDate").value = "";
+            document.getElementById("activities").value = "";
+        }
+
+        function deleteItem(item) {
+            var listItem = item.parentElement;
+            listItem.remove();
+        }
+    </script>
+</body>
+</html>
